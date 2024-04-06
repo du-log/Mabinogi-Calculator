@@ -1,0 +1,256 @@
+﻿<Window x:Class="Mabinogi_Calculator_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mabinogi_Calculator_WPF" xmlns:viewmodel="clr-namespace:Mabinogi_Calculator_WPF.MVVM.ViewModel"
+        mc:Ignorable="d" FontSize="15" FontFamily="Segoe Light" WindowStartupLocation="CenterScreen"
+        Title="Mabi Calc" 
+        Height="650" Width="1200"
+        MouseDown="Window_MouseDown">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="White" Offset="1"/>
+            <GradientStop Color="Green" Offset="0"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Window.DataContext>
+        <viewmodel:MainViewModel/>
+    </Window.DataContext>
+    <Grid x:Name="MainGrid" Focusable="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="40"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Column 1 -->
+        <!-- Row 1:Name,Current Age,Race -->
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <!-- Name -->
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Name" Foreground="White" Margin="3"/>
+            <TextBox Grid.Column="1" Grid.Row="0" Width="100" Text="{Binding CharacterName}" Margin="3"/>
+            <!-- Race -->
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Race" Foreground="White" Margin="3"/>
+            <ComboBox x:Name="raceComboBox" Grid.Column="1" Grid.Row="1" Width="auto" Margin="3" SelectedItem="{Binding SelectedRace}" ItemsSource="{Binding Race}"/>
+        </Grid>
+        <!-- Row 3:HP,MP,Stam -->
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Background="DarkGreen">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="HP" Margin="2" Foreground="White"/>
+                <TextBox x:Name="baseHpText" Grid.Column="1" Grid.Row="0" Text="{Binding HPStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="40"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="MP" Margin="2" Foreground="White"/>
+                <TextBox x:Name="baseMpText" Grid.Column="1" Grid.Row="1" Text="{Binding MPStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="40"/>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Stamina" Margin="2" Foreground="White"/>
+                <TextBox x:Name="baseStamText" Grid.Column="1" Grid.Row="2" Text="{Binding StamStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="40"/>
+            </Grid>
+        </Border>
+        <!-- Row 5:STR,INT,DEX,Will,Luck -->
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="5" Background="DarkGreen">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <!-- Str -->
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="STR" Margin="2" Foreground="White"/>
+                <TextBox x:Name="totalStrText" Grid.Column="1" Grid.Row="0" Text="{Binding StrStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="30"/>
+                <!-- Int -->
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="INT" Margin="2" Foreground="White"/>
+                <TextBox x:Name="totalIntText" Grid.Column="1" Grid.Row="1" Text="{Binding IntStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="30"/>
+                <!-- Dex -->
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="DEX" Margin="2" Foreground="White"/>
+                <TextBox x:Name="totalDexText" Grid.Column="1" Grid.Row="2" Text="{Binding DexStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="30"/>
+                <!-- Will -->
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="Will" Margin="2" Foreground="White"/>
+                <TextBox x:Name="totalWillText" Grid.Column="1" Grid.Row="3" Text="{Binding WillStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="30"/>
+                <!-- Luck -->
+                <TextBlock Grid.Column="0" Grid.Row="4" Text="Luck" Margin="2" Foreground="White"/>
+                <TextBox x:Name="totalLuckText" Grid.Column="1" Grid.Row="4" Text="{Binding LuckStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="30"/>
+            </Grid>
+        </Border>
+        <!-- Row 6:Def,MDef,Prot,MProt -->
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="7" Background="DarkGreen">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Defense" Margin="2" Foreground="White"/>
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding ModDefense, Mode=TwoWay}" Margin="2" Foreground="Yellow"/>
+                <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding BaseDefense, Mode=TwoWay, StringFormat={}({0})}" FontSize="10" Foreground="White"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Protection" Margin="2" Foreground="White"/>
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding ModProtection, Mode=TwoWay}" Margin="2" Foreground="Yellow"/>
+                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding BaseProtection, Mode=TwoWay, StringFormat={}({0})}" FontSize="10" Foreground="White"/>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Magic Def." Margin="2" Foreground="White"/>
+                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding ModMagicDefense, Mode=TwoWay}" Margin="2" Foreground="Yellow"/>
+                <TextBlock Grid.Column="2" Grid.Row="2" Text="{Binding BaseMagicDefense, Mode=TwoWay, StringFormat={}({0})}" FontSize="10" Foreground="White"/>
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="Magic Prot." Margin="2" Foreground="White"/>
+                <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding ModMagicProtection, Mode=TwoWay}" Margin="2" Foreground="Yellow"/>
+                <TextBlock Grid.Column="2" Grid.Row="3" Text="{Binding BaseMagicProtection, Mode=TwoWay, StringFormat={}({0})}" FontSize="10" Foreground="White"/>
+            </Grid>
+        </Border>
+        <!-- Column 4 -->
+        <!-- Row 1:Title,Rebirth Age,Talent -->
+        <Grid Grid.Column="4" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <!-- Title -->
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Title" Foreground="White" Margin="3"/>
+            <ComboBox x:Name="titleComboBox" Grid.Column="1" Grid.Row="0" Width="auto" Margin="3">
+                
+            </ComboBox>
+            <!-- 2nd Title -->
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="2nd Title" Foreground="White" Margin="3"/>
+            <ComboBox x:Name="secondTitleComboBox" Grid.Column="1" Grid.Row="1" Width="auto" Margin="3">
+
+            </ComboBox>
+            <!-- Talent -->
+            <TextBlock Grid.Column="0" Grid.Row="3" Text="Active Talent" Foreground="White" Margin="3"/>
+            <ComboBox x:Name="talentComboBox" Grid.Column="1" Grid.Row="2" Width="auto" Margin="3">
+                
+            </ComboBox>
+        </Grid>
+        <!-- Row 3:Current Level,Total -->
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="2" Background="DarkGreen">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Level" Foreground="White" Margin="1"/>
+                <ComboBox x:Name="levelComboBox" Grid.Column="1" Grid.Row="0" Margin="1" Width="75" SelectedItem="{Binding CurrentLevel}" ItemsSource="{Binding CurrentLevels}"/>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Cumulative Lvl" Foreground="White" Margin="1"/>
+                <TextBox Grid.Column="1" Grid.Row="2" Margin="1" Width="75" Text="{Binding TotalLevel}" KeyDown="TextBox_KeyDown"/>
+            </Grid>
+        </Border>
+        <!-- Row 5:Damage,Magic Attack,etc. -->
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="4" Grid.Row="5" Grid.RowSpan="3" Background="DarkGreen">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <!-- Damage -->
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Damage" Margin="2" Foreground="White"/>
+                <TextBlock x:Name="damageText" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" Text="{Binding Damage}" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
+                <!-- Magic Attack -->
+                <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="Magic Attack" Margin="2" Foreground="White"/>
+                <TextBlock x:Name="modMatkText" Grid.Column="2" Grid.Row="1" Text="{Binding ModMagicAttack, Mode=TwoWay}" Margin="2" Foreground="Yellow"/>
+                <TextBlock x:Name="baseMatkText" Grid.Column="3" Grid.Row="1" Text="{Binding BaseMagicAttack, Mode=TwoWay, StringFormat={}({0})}" FontSize="10" Foreground="White"/>
+                <!-- Alchemic Damage -->
+                <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Text="Alchemic Damage" Margin="2" Foreground="White"/>
+                <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <!-- Fire -->
+                    <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Fire" Margin="25,2" Foreground="White"/>
+                    <TextBlock x:Name="fireNum" Grid.Column="1" Grid.Row="0" Text="0" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
+                    <!-- Water -->
+                    <TextBlock Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" Text="Water" Margin="25,2" Foreground="White"/>
+                    <TextBlock x:Name="waterNum" Grid.Column="3" Grid.Row="0" Text="0" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
+                    <!-- Wind -->
+                    <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="Wind" Margin="25,2" Foreground="White"/>
+                    <TextBlock x:Name="windNum" Grid.Column="1" Grid.Row="1" Text="0" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
+                    <!-- Earth -->
+                    <TextBlock Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Text="Earth" Margin="25,2" Foreground="White"/>
+                    <TextBlock x:Name="earthNum" Grid.Column="3" Grid.Row="1" Text="0" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
+                </Grid>
+                <!-- Injury Rate -->
+                <TextBlock Grid.Column="0" Grid.Row="4" Text="Injury Rate" Margin="2" Foreground="White"/>
+                <TextBlock x:Name="injuryText" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" Text="{Binding Injury}" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
+                <!-- Critical -->
+                <TextBlock Grid.Column="0" Grid.Row="5" Text="Critical" Margin="2" Foreground="White"/>
+                <TextBlock x:Name="criticalText" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3" Text="{Binding CriticalRate, StringFormat={}{0:N1}%}" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
+                <!-- Balance -->
+                <TextBlock Grid.Column="0" Grid.Row="6" Text="Balance" Margin="2" Foreground="White"/>
+                <TextBlock x:Name="balanceText" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="0%" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
+                <!-- Armor Pierce -->
+                <TextBlock Grid.Column="0" Grid.Row="7" Text="Armor Pierce" Margin="2" Foreground="White"/>
+                <TextBlock x:Name="pierceText" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Text="{Binding ArmorPierce}" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
+            </Grid>
+        </Border>
+        <!-- Version Label -->
+        <Label Grid.Column="99" Grid.Row="99" FontSize="10" Content="V0.2" Foreground="White" HorizontalAlignment="Right"/>
+    </Grid>
+</Window>

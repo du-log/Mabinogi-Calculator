@@ -1,0 +1,22 @@
+﻿Update Log
+March 29, 2024
+- Change Parenthesized Stat TextBlocks to TextBoxes
+- Removed Yellow TextBlocks for Primary Stat Modifiers
+- Removed Age TextBoxes and TextBlocks
+- Add Focusable to Main Grid for TextBox unfocusing
+
+April 4, 2024
+- Renamed CharacterVM in CompositeVM : CVM -> CharacterVM
+- Rebound CharacterVM to respective fields
+- Created ViewModels for Stats: Primary, Defensive, Offensive
+- Renamed CompositeVM -> MainViewModel
+- Moved all currently existing fields, getters-setters, etc. to MainViewModel
+- Scrapping other view models due to complexity with linking StatVM and DefensiveVM
+*Keeping the classes for future use, likely renaming if I need more view models when I implement skills, weapons, etc.*
+- Connected Calculations.cs model to MainViewModel
+*Thinking of using multiple models for different calculations*
+
+April 5, 2024
+-Added basic calculations for base defense, base magic defense, base magic protection
+-Added basic calculations for critical rate, injury, minimum damage, maximum damage, base magic attack, armor pierce
+*Refraining from adding protection, alchemic damage and balance calculations due to requirements that are not implemented yet*
