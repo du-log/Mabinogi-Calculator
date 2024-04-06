@@ -17,6 +17,10 @@ April 4, 2024
 *Thinking of using multiple models for different calculations*
 
 April 5, 2024
--Added basic calculations for base defense, base magic defense, base magic protection
--Added basic calculations for critical rate, injury, minimum damage, maximum damage, base magic attack, armor pierce
+- Added basic calculations for base defense, base magic defense, base magic protection
+- Added basic calculations for critical rate, injury, minimum damage, maximum damage, base magic attack, armor pierce
 *Refraining from adding protection, alchemic damage and balance calculations due to requirements that are not implemented yet*
+
+April 6, 2024
+- Decided to delete classes not in use
+- Pushed to GitHub for the sake of having something
