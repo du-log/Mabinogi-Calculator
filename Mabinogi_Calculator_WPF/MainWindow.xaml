@@ -7,7 +7,36 @@
         mc:Ignorable="d" FontSize="15" FontFamily="Segoe Light" WindowStartupLocation="CenterScreen"
         Title="Mabi Calc" 
         Height="650" Width="1200"
+        ResizeMode="NoResize"
         MouseDown="Window_MouseDown">
+    <Window.Resources>
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Border Padding="2,4,2,0">
+                            <Grid>
+                                <Grid>
+                                    <Border x:Name="Border" BorderBrush="White" BorderThickness="1" CornerRadius="3,3,0,0" Background="Transparent"/>
+                                </Grid>
+                                <ContentPresenter x:Name="Header" ContentSource="Header" TextElement.Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Header" Property="TextElement.Foreground" Value="MediumPurple"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="DarkGreen"/>
+                                <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </Window.Resources>
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="White" Offset="1"/>
@@ -20,46 +49,50 @@
     <Grid x:Name="MainGrid" Focusable="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="40"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="5"/>
-            <ColumnDefinition Width="5"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Name="Column1" Width="auto"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Name="Column3" Width="auto"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Name="Column5" Width="auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="40"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition x:Name="Row2" Height="auto"/>
             <RowDefinition Height="10"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition x:Name="Row4" Height="auto"/>
             <RowDefinition Height="10"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition x:Name="Row6" Height="auto"/>
             <RowDefinition Height="10"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition x:Name="Row8" Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         
         <!-- Column 1 -->
-        <!-- Row 1:Name,Current Age,Race -->
-        <Grid Grid.Column="1" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <!-- Name -->
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="Name" Foreground="White" Margin="3"/>
-            <TextBox Grid.Column="1" Grid.Row="0" Width="100" Text="{Binding CharacterName}" Margin="3"/>
-            <!-- Race -->
-            <TextBlock Grid.Column="0" Grid.Row="2" Text="Race" Foreground="White" Margin="3"/>
-            <ComboBox x:Name="raceComboBox" Grid.Column="1" Grid.Row="1" Width="auto" Margin="3" SelectedItem="{Binding SelectedRace}" ItemsSource="{Binding Race}"/>
-        </Grid>
-        <!-- Row 3:HP,MP,Stam -->
-        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Background="DarkGreen">
+        <!-- Row 2:Name,Current Age,Race -->
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="2" Background="DarkGreen">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <!-- Name -->
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Name" Foreground="White" Margin="3"/>
+                <TextBox Grid.Column="1" Grid.Row="0" Width="100" Text="{Binding CharacterName}" Margin="3"/>
+                <!-- Race -->
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Race" Foreground="White" Margin="3"/>
+                <ComboBox x:Name="raceComboBox" Grid.Column="1" Grid.Row="1" Width="auto" Margin="3" SelectedItem="{Binding SelectedRace}" ItemsSource="{Binding Race}"/>
+            </Grid>
+        </Border>
+        <!-- Row 4:HP,MP,Stam -->
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="4" Background="DarkGreen">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -78,8 +111,8 @@
                 <TextBox x:Name="baseStamText" Grid.Column="1" Grid.Row="2" Text="{Binding StamStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="40"/>
             </Grid>
         </Border>
-        <!-- Row 5:STR,INT,DEX,Will,Luck -->
-        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="5" Background="DarkGreen">
+        <!-- Row 6:STR,INT,DEX,Will,Luck -->
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="6" Background="DarkGreen">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -109,8 +142,8 @@
                 <TextBox x:Name="totalLuckText" Grid.Column="1" Grid.Row="4" Text="{Binding LuckStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="30"/>
             </Grid>
         </Border>
-        <!-- Row 6:Def,MDef,Prot,MProt -->
-        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="7" Background="DarkGreen">
+        <!-- Row 8:Def,MDef,Prot,MProt -->
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="8" Background="DarkGreen">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -138,35 +171,37 @@
             </Grid>
         </Border>
         <!-- Column 4 -->
-        <!-- Row 1:Title,Rebirth Age,Talent -->
-        <Grid Grid.Column="4" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <!-- Title -->
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="Title" Foreground="White" Margin="3"/>
-            <ComboBox x:Name="titleComboBox" Grid.Column="1" Grid.Row="0" Width="auto" Margin="3">
-                
-            </ComboBox>
-            <!-- 2nd Title -->
-            <TextBlock Grid.Column="0" Grid.Row="1" Text="2nd Title" Foreground="White" Margin="3"/>
-            <ComboBox x:Name="secondTitleComboBox" Grid.Column="1" Grid.Row="1" Width="auto" Margin="3">
+        <!-- Row 2:Title,Rebirth Age,Talent -->
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="3" Grid.Row="2" Background="DarkGreen">
+            <Grid Grid.Column="4" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <!-- Title -->
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Title" Foreground="White" Margin="3"/>
+                <ComboBox x:Name="titleComboBox" Grid.Column="1" Grid.Row="0" Width="auto" Margin="3">
 
-            </ComboBox>
-            <!-- Talent -->
-            <TextBlock Grid.Column="0" Grid.Row="3" Text="Active Talent" Foreground="White" Margin="3"/>
-            <ComboBox x:Name="talentComboBox" Grid.Column="1" Grid.Row="2" Width="auto" Margin="3">
-                
-            </ComboBox>
-        </Grid>
-        <!-- Row 3:Current Level,Total -->
-        <Border BorderBrush="White" BorderThickness="1" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="2" Background="DarkGreen">
+                </ComboBox>
+                <!-- 2nd Title -->
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="2nd Title" Foreground="White" Margin="3"/>
+                <ComboBox x:Name="secondTitleComboBox" Grid.Column="1" Grid.Row="1" Width="auto" Margin="3">
+
+                </ComboBox>
+                <!-- Talent -->
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="Active Talent" Foreground="White" Margin="3"/>
+                <ComboBox x:Name="talentComboBox" Grid.Column="1" Grid.Row="2" Width="auto" Margin="3">
+
+                </ComboBox>
+            </Grid>
+        </Border>
+        <!-- Row 4:Current Level,Total -->
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="3" Grid.Row="4" Background="DarkGreen">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -180,12 +215,12 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Level" Foreground="White" Margin="1"/>
                 <ComboBox x:Name="levelComboBox" Grid.Column="1" Grid.Row="0" Margin="1" Width="75" SelectedItem="{Binding CurrentLevel}" ItemsSource="{Binding CurrentLevels}"/>
-                <TextBlock Grid.Column="0" Grid.Row="2" Text="Cumulative Lvl" Foreground="White" Margin="1"/>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Cumulative" Foreground="White" Margin="1"/>
                 <TextBox Grid.Column="1" Grid.Row="2" Margin="1" Width="75" Text="{Binding TotalLevel}" KeyDown="TextBox_KeyDown"/>
             </Grid>
         </Border>
-        <!-- Row 5:Damage,Magic Attack,etc. -->
-        <Border BorderBrush="White" BorderThickness="1" Grid.Column="4" Grid.Row="5" Grid.RowSpan="3" Background="DarkGreen">
+        <!-- Row 6:Damage,Magic Attack,etc. -->
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="3" Grid.Row="6" Grid.RowSpan="3" Background="DarkGreen">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
@@ -250,7 +285,23 @@
                 <TextBlock x:Name="pierceText" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Text="{Binding ArmorPierce}" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
             </Grid>
         </Border>
+        <!-- Column 5 -->
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="5" Grid.Row="2" Grid.RowSpan="7" Background="Green">
+            <TabControl BorderThickness="0" Width="400" Background="DarkGreen">
+                <TabItem Header="All"></TabItem>
+                <TabItem Header="Combat"></TabItem>
+                <TabItem Header="Magic"></TabItem>
+                <TabItem Header="Alchemy"></TabItem>
+                <TabItem Header="Fighter"></TabItem>
+                <TabItem Header="Music"></TabItem>
+                <TabItem Header="Puppetry"></TabItem>
+                <TabItem Header="Dual Gun"></TabItem>
+                <TabItem Header="Ninja"></TabItem>
+                <TabItem Header="Chain"></TabItem>
+                <TabItem Header="Hidden"></TabItem>
+            </TabControl>
+        </Border>
         <!-- Version Label -->
-        <Label Grid.Column="99" Grid.Row="99" FontSize="10" Content="V0.2" Foreground="White" HorizontalAlignment="Right"/>
+        <Label Grid.Column="99" Grid.Row="99" FontSize="10" Content="V0.2" Foreground="Black" HorizontalAlignment="Right"/>
     </Grid>
 </Window>

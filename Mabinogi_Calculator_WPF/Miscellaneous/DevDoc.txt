@@ -24,3 +24,10 @@ April 5, 2024
 April 6, 2024
 - Decided to delete classes not in use
 - Pushed to GitHub for the sake of having something
+
+May 7, 2024
+- Disabled window resizing, might make it dynamic, but for now I will keep it at 650x1200 (HxW)
+- Added additional row to the main grid, moved all controls a row down to have things closer to center line of the window
+- Added TabControl, individual TabItems currently empty
+- Created a basic style for TabItems (extremely) roughly similar to ingame skill window
+- Connected modified stats (defense, magic defense, magic protection, magic attack) to base stats, no more 0s

@@ -378,17 +378,40 @@ namespace Mabinogi_Calculator_WPF.MVVM.ViewModel
             {
                 BaseDefense = calc.CalcBaseDefense(StrStat);
             }
+            //Mod Defense
+            if (propertyName == nameof(BaseDefense))
+            {
+                ModDefense = BaseDefense;
+            }
+
             //Base Magic Attack, Base Magic Protection
             if (propertyName == nameof(IntStat))
             {
                 BaseMagicProtection = calc.CalcBaseMagicProtection(IntStat);
                 BaseMagicAttack = calc.CalcBaseMagicAttack(IntStat);
             }
+            //Mod Magic Attack
+            if (propertyName == nameof(BaseMagicAttack))
+            {
+                ModMagicAttack = BaseMagicAttack;
+            }
+            //Mod Magic Protection
+            if (propertyName == nameof(BaseMagicProtection))
+            {
+                ModMagicProtection = BaseMagicProtection;
+            }
+
             //Base Magic Defense
             if (propertyName == nameof(WillStat))
             {
                 BaseMagicDefense = calc.CalcBaseMagicDefense(WillStat);
             }
+            //Mod Magic Defense
+            if (propertyName == nameof(BaseMagicDefense))
+            {
+                ModMagicDefense = BaseMagicDefense;
+            }
+
             //Damage
             if (propertyName == nameof(StrStat))
             {
