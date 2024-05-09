@@ -11,7 +11,7 @@ Current functions as of May 9, 2024:
 - Skill tabs for (almost) every talent, though still empty.
 
 Future plans:
-- Importing skill values for each rank, respective icons from a local database
+- Importing skill values for each rank, respective icons
 - Weapon customization (standard and special upgrades, enchants, etc. that affect character damage values)
 - Box for additional modifiers (totems and all that other stuff)
 - Functions for importing/exporting/saving of character/weapon/skill info
