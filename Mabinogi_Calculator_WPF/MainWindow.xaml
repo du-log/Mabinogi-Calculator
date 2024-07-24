@@ -35,7 +35,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
     </Window.Resources>
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -48,17 +47,16 @@
     </Window.DataContext>
     <Grid x:Name="MainGrid" Focusable="True">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Name="Column1" Width="auto"/>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Name="Column3" Width="auto"/>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Name="Column5" Width="auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="40"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition x:Name="Row2" Height="auto"/>
             <RowDefinition Height="10"/>
@@ -68,7 +66,7 @@
             <RowDefinition Height="10"/>
             <RowDefinition x:Name="Row8" Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
         <!-- Column 1 -->
@@ -286,22 +284,266 @@
             </Grid>
         </Border>
         <!-- Column 5 -->
+        <!-- Skill Tabs -->
         <Border BorderBrush="White" BorderThickness="1" Grid.Column="5" Grid.Row="2" Grid.RowSpan="7" Background="Green">
             <TabControl BorderThickness="0" Width="400" Background="DarkGreen">
-                <TabItem Header="All"></TabItem>
-                <TabItem Header="Combat"></TabItem>
-                <TabItem Header="Magic"></TabItem>
-                <TabItem Header="Alchemy"></TabItem>
-                <TabItem Header="Fighter"></TabItem>
-                <TabItem Header="Music"></TabItem>
-                <TabItem Header="Puppetry"></TabItem>
-                <TabItem Header="Dual Gun"></TabItem>
-                <TabItem Header="Ninja"></TabItem>
-                <TabItem Header="Chain"></TabItem>
-                <TabItem Header="Hidden"></TabItem>
+                <TabItem Header="Combat">
+                    <ScrollViewer MaxHeight="350" VerticalScrollBarVisibility="auto">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="10"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition x:Name="Smash" Height="auto"/>
+                                <RowDefinition x:Name="Charge" Height="auto"/>
+                                <RowDefinition x:Name="AssaultSlash" Height="auto"/>
+                                <RowDefinition x:Name="Bash" Height="auto"/>
+                                <RowDefinition x:Name="Windmill" Height="auto"/>
+                                <RowDefinition x:Name="ThrowingAttack" Height="auto"/>
+                                <RowDefinition x:Name="Stampede" Height="auto"/>
+                                <RowDefinition x:Name="FinalHit" Height="auto"/>
+                                <RowDefinition x:Name="FinalStrike" Height="auto"/>
+                                <RowDefinition x:Name="FinalShot" Height="auto"/>
+                                <RowDefinition x:Name="RageImpact" Height="auto"/>
+                                <RowDefinition x:Name="LanceCharge" Height="auto"/>
+                                <RowDefinition x:Name="LanceImpact" Height="auto"/>
+                                <RowDefinition x:Name="Stomp" Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <!-- Smash -->
+                            <Image x:Name="SmashImg" Grid.Column="0" Grid.Row="0" Source="\Images\Skill_Icons\Smash.png" Margin="1"/>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="0" Margin="1">
+                                <TextBlock Text="Smash" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="0" Margin="1">
+                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ComboBox Name="SmashRank" Grid.Column="3" Grid.Row="0" SelectedItem="{Binding SmashRank}" ItemsSource="{Binding DanSkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <!-- Charge -->
+                            <Image x:Name="ChargeImg" Grid.Column="0" Grid.Row="1" Source="\Images\Skill_Icons\Charge.png" Margin="1"/>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="1" Margin="1">
+                                <TextBlock Text="Charge" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="1" Margin="1">
+                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ComboBox Name="ChargeRank" Grid.Column="3" Grid.Row="1" SelectedItem="{Binding ChargeRank}" ItemsSource="{Binding DanSkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <!-- Assault Slash -->
+                            <Image x:Name="AssaultSlashImg" Grid.Column="0" Grid.Row="2" Source="\Images\Skill_Icons\Assault_Slash.png" Margin="1"/>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="2" Margin="1">
+                                <TextBlock Text="Assault Slash" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="2" Margin="1">
+                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ComboBox Name="AssaultSlashRank" Grid.Column="3" Grid.Row="2" SelectedItem="{Binding AssaultSlashRank}" ItemsSource="{Binding DanSkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <!-- Bash -->
+                            <Image x:Name="BashImg" Grid.Column="0" Grid.Row="3" Source="\Images\Skill_Icons\Bash.png" Margin="1"/>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="3" Margin="1">
+                                <TextBlock Text="Bash" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="3" Margin="1">
+                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ComboBox Name="BashRank" Grid.Column="3" Grid.Row="3" SelectedItem="{Binding BashRank}" ItemsSource="{Binding SkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <!-- Windmill -->
+                            <Image x:Name="WindmillImg" Grid.Column="0" Grid.Row="4" Source="\Images\Skill_Icons\Windmill.png" Margin="1"/>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="4" Margin="1">
+                                <TextBlock Text="Windmill" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="4" Margin="1">
+                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ComboBox Name="WindmillRank" Grid.Column="3" Grid.Row="4" SelectedItem="{Binding WindmillRank}" ItemsSource="{Binding DanSkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <!-- Throwing Attack -->
+                            <Image x:Name="ThrowingAttackImg" Grid.Column="0" Grid.Row="5" Source="\Images\Skill_Icons\Throwing_Attack.png" Margin="1"/>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="5" Margin="1">
+                                <TextBlock Text="Throwing Attack" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="5" Margin="1">
+                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ComboBox Name="ThrowingAttackRank" Grid.Column="3" Grid.Row="5" SelectedItem="{Binding ThrowingAttackRank}" ItemsSource="{Binding SkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <!-- Stampede -->
+                            <Image x:Name="StampedeImg" Grid.Column="0" Grid.Row="6" Source="\Images\Skill_Icons\Stampede.png" Margin="1"/>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="6" Margin="1">
+                                <TextBlock Text="Stampede" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="6" Margin="1">
+                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ComboBox Name="StampedeRank" Grid.Column="3" Grid.Row="6" SelectedItem="{Binding StampedeRank}" ItemsSource="{Binding SkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <!-- Final Hit -->
+                            <Image x:Name="FinalHitImg" Grid.Column="0" Grid.Row="7" Source="\Images\Skill_Icons\Final_Hit.png" Margin="1"/>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="7" Margin="1">
+                                <TextBlock Text="Final Hit" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="7" Margin="1">
+                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ComboBox Name="FinalHitRank" Grid.Column="3" Grid.Row="7" SelectedItem="{Binding FinalHitRank}" ItemsSource="{Binding SkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <!-- Final Strike -->
+                            <Image x:Name="FinalStrikeImg" Grid.Column="0" Grid.Row="8" Source="\Images\Skill_Icons\Final_Strike.png" Margin="1"/>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="8" Margin="1">
+                                <TextBlock Text="Final Strike" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="8" Margin="1">
+                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ComboBox Name="FinalStrikeRank" Grid.Column="3" Grid.Row="8" SelectedItem="{Binding FinalStrikeRank}" ItemsSource="{Binding SkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <!-- Final Shot -->
+                            <Image x:Name="FinalShotImg" Grid.Column="0" Grid.Row="9" Source="\Images\Skill_Icons\Final_Shot.png" Margin="1"/>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="9" Margin="1">
+                                <TextBlock Text="Final Shot" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="9" Margin="1">
+                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ComboBox Name="FinalShotRank" Grid.Column="3" Grid.Row="9" SelectedItem="{Binding FinalShotRank}" ItemsSource="{Binding SkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <!-- Rage Impact -->
+                            <Image x:Name="RageImpactImg" Grid.Column="0" Grid.Row="10" Source="\Images\Skill_Icons\Rage_Impact.png" Margin="1"/>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="10" Margin="1">
+                                <TextBlock Text="Rage Impact" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="10" Margin="1">
+                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ComboBox Name="RageImpactRank" Grid.Column="3" Grid.Row="10" SelectedItem="{Binding RageImpactRank}" ItemsSource="{Binding SkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <!-- Lance Charge -->
+                            <Image x:Name="LanceChargeImg" Grid.Column="0" Grid.Row="11" Source="\Images\Skill_Icons\Lance_Charge.png" Margin="1"/>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="11" Margin="1">
+                                <TextBlock Text="Lance Charge" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="11" Margin="1">
+                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ComboBox Name="LanceChargeRank" Grid.Column="3" Grid.Row="11" SelectedItem="{Binding LanceChargeRank}" ItemsSource="{Binding DanSkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <!-- Lance Impact -->
+                            <Image x:Name="LanceImpactImg" Grid.Column="0" Grid.Row="12" Source="\Images\Skill_Icons\Rage_Impact.png" Margin="1"/>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="12" Margin="1">
+                                <TextBlock Text="Lance Impact" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="12" Margin="1">
+                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ComboBox Name="LanceImpactRank" Grid.Column="3" Grid.Row="12" SelectedItem="{Binding LanceImpactRank}" ItemsSource="{Binding SkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <!-- Stomp -->
+                            <Image x:Name="StompImg" Grid.Column="0" Grid.Row="13" Source="\Images\Skill_Icons\Stomp.png" Margin="1"/>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="13" Margin="1">
+                                <TextBlock Text="Stomp" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="13" Margin="1">
+                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ComboBox Name="StompRank" Grid.Column="3" Grid.Row="13" SelectedItem="{Binding StompRank}" ItemsSource="{Binding SkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Magic">
+                    <ScrollViewer>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Alchemy">
+                    <ScrollViewer>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Fighter">
+                    <ScrollViewer>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Music">
+                    <ScrollViewer>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Puppetry">
+                    <ScrollViewer>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Dual Gun">
+                    <ScrollViewer>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Ninja">
+                    <ScrollViewer>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Chain">
+                    <ScrollViewer>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Hidden">
+                    <ScrollViewer>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
             </TabControl>
         </Border>
         <!-- Version Label -->
-        <Label Grid.Column="99" Grid.Row="99" FontSize="10" Content="V0.2" Foreground="Black" HorizontalAlignment="Right"/>
+        <Label Grid.Column="99" Grid.Row="99" FontSize="10" Content="V0.3" Foreground="Black" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

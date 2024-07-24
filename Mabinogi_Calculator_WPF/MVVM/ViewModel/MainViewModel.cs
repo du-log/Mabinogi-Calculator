@@ -45,10 +45,26 @@ namespace Mabinogi_Calculator_WPF.MVVM.ViewModel
         private double _criticalRate;
         private int _balance;
         private int _armorPierce;
+        //Skill Box
+        private string _smashRank;
+        private string _chargeRank;
+        private string _assaultSlashRank;
+        private string _bashRank;
+        private string _windmillRank;
+        private string _throwingAttackRank;
+        private string _stampedeRank;
+        private string _finalHitRank;
+        private string _finalStrikeRank;
+        private string _finalShotRank;
+        private string _rageImpactRank;
+        private string _lanceChargeRank;
+        private string _lanceImpactRank;
+        private string _stompRank;
 
         public List<int> CurrentLevels { get; }
         public List<string> Race { get; }
-
+        public List<string> SkillRankBox { get; }
+        public List<string> DanSkillRankBox { get; }
         public Calculations calc { get; }
 
         public MainViewModel()
@@ -62,6 +78,10 @@ namespace Mabinogi_Calculator_WPF.MVVM.ViewModel
             }
             //Populate Race ComboBox
             Race = new List<string>() { "Human", "Elf", "Giant" };
+
+            SkillRankBox = new List<string>() { "F", "E", "D", "C", "B", "A", "9", "8", "7", "6", "5", "4", "3", "2", "1" };
+
+            DanSkillRankBox = new List<string>() { "F", "E", "D", "C", "B", "A", "9", "8", "7", "6", "5", "4", "3", "2", "1", "D1", "D2", "D3" };
 
             //Defaults
             CharacterName = "Omnicity";
@@ -364,6 +384,134 @@ namespace Mabinogi_Calculator_WPF.MVVM.ViewModel
             }
         }
 
+        //Get-Set Skill Tab
+        public string SmashRank
+        {
+            get { return _smashRank; }
+            set
+            {
+                _smashRank = value;
+                OnPropertyChanged(nameof(SmashRank));
+            }
+        }
+        public string ChargeRank
+        {
+            get { return _chargeRank; }
+            set
+            {
+                _chargeRank = value;
+                OnPropertyChanged(nameof(ChargeRank));
+            }
+        }
+        public string AssaultSlashRank
+        {
+            get { return _assaultSlashRank; }
+            set
+            {
+                _assaultSlashRank = value;
+                OnPropertyChanged(nameof(AssaultSlashRank));
+            }
+        }
+        public string BashRank
+        {
+            get { return _bashRank; }
+            set
+            {
+                _bashRank = value;
+                OnPropertyChanged(nameof(BashRank));
+            }
+        }
+        public string WindmillRank
+        {
+            get { return _windmillRank; }
+            set
+            {
+                _windmillRank = value;
+                OnPropertyChanged(nameof(WindmillRank));
+            }
+        }
+        public string ThrowingAttackRank
+        {
+            get { return _throwingAttackRank; }
+            set
+            {
+                _throwingAttackRank = value;
+                OnPropertyChanged(nameof(ThrowingAttackRank));
+            }
+        }
+        public string StampedeRank
+        {
+            get { return _stampedeRank; }
+            set
+            {
+                _stampedeRank = value;
+                OnPropertyChanged(nameof(StampedeRank));
+            }
+        }
+        public string FinalHitRank
+        {
+            get { return _finalHitRank; }
+            set
+            {
+                _finalHitRank = value;
+                OnPropertyChanged(nameof(FinalHitRank));
+            }
+        }
+        public string FinalStrikeRank
+        {
+            get { return _finalStrikeRank; }
+            set
+            {
+                _finalStrikeRank = value;
+                OnPropertyChanged(nameof(FinalStrikeRank));
+            }
+        }
+        public string FinalShotRank
+        {
+            get { return _finalShotRank; }
+            set
+            {
+                _finalShotRank = value;
+                OnPropertyChanged(nameof(FinalShotRank));
+            }
+        }
+        public string RageImpactRank
+        {
+            get { return _rageImpactRank; }
+            set
+            {
+                _rageImpactRank = value;
+                OnPropertyChanged(nameof(RageImpactRank));
+            }
+        }
+        public string LanceChargeRank
+        {
+            get { return _lanceChargeRank; }
+            set
+            {
+                _lanceChargeRank = value;
+                OnPropertyChanged(nameof(LanceChargeRank));
+            }
+        }
+        public string LanceImpactRank
+        {
+            get { return _lanceImpactRank; }
+            set
+            {
+                _lanceChargeRank = value;
+                OnPropertyChanged(nameof(LanceImpactRank));
+            }
+        }
+        public string StompRank
+        {
+            get { return _stompRank; }
+            set
+            {
+                _stompRank = value;
+                OnPropertyChanged(nameof(StompRank));
+            }
+        }
+        
         //Get-Set Placeholder
 
         //Event Handler

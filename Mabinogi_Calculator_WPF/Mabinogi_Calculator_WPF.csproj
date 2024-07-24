@@ -9,9 +9,47 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\Skill_Icons\Assault_Slash.png" />
+    <None Remove="Images\Skill_Icons\Bash.png" />
+    <None Remove="Images\Skill_Icons\Charge.png" />
+    <None Remove="Images\Skill_Icons\Final_Hit.png" />
+    <None Remove="Images\Skill_Icons\Final_Shot.png" />
+    <None Remove="Images\Skill_Icons\Final_Strike.png" />
+    <None Remove="Images\Skill_Icons\Lance_Charge.png" />
+    <None Remove="Images\Skill_Icons\Rage_Impact.png" />
+    <None Remove="Images\Skill_Icons\Smash.png" />
+    <None Remove="Images\Skill_Icons\Stampede.png" />
+    <None Remove="Images\Skill_Icons\Stomp.png" />
+    <None Remove="Images\Skill_Icons\Throwing_Attack.png" />
+    <None Remove="Images\Skill_Icons\Windmill.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Skill_Icons\Assault_Slash.png" />
+    <Resource Include="Images\Skill_Icons\Bash.png" />
+    <Resource Include="Images\Skill_Icons\Charge.png" />
+    <Resource Include="Images\Skill_Icons\Final_Hit.png" />
+    <Resource Include="Images\Skill_Icons\Final_Shot.png" />
+    <Resource Include="Images\Skill_Icons\Final_Strike.png" />
+    <Resource Include="Images\Skill_Icons\Lance_Charge.png" />
+    <Resource Include="Images\Skill_Icons\Rage_Impact.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Fonts\" />
-    <Folder Include="Images\" />
     <Folder Include="Theme\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SQLite" Version="3.13.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Skill_Icons\Smash.png" />
+    <Resource Include="Images\Skill_Icons\Stampede.png" />
+    <Resource Include="Images\Skill_Icons\Stomp.png" />
+    <Resource Include="Images\Skill_Icons\Throwing_Attack.png" />
+    <Resource Include="Images\Skill_Icons\Windmill.png" />
   </ItemGroup>
 
 </Project>
