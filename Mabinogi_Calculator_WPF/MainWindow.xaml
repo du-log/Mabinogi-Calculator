@@ -71,7 +71,7 @@
         
         <!-- Column 1 -->
         <!-- Row 2:Name,Current Age,Race -->
-        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="2" Background="DarkGreen">
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="2" Background="DarkGreen" DataContext="{Binding CharacterInfo}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -90,7 +90,7 @@
             </Grid>
         </Border>
         <!-- Row 4:HP,MP,Stam -->
-        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="4" Background="DarkGreen">
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="4" Background="DarkGreen" DataContext="{Binding PrimaryStats}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -110,7 +110,7 @@
             </Grid>
         </Border>
         <!-- Row 6:STR,INT,DEX,Will,Luck -->
-        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="6" Background="DarkGreen">
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="6" Background="DarkGreen" DataContext="{Binding PrimaryStats}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -141,7 +141,7 @@
             </Grid>
         </Border>
         <!-- Row 8:Def,MDef,Prot,MProt -->
-        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="8" Background="DarkGreen">
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="8" Background="DarkGreen" DataContext="{Binding DefensiveStats}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -198,27 +198,8 @@
                 </ComboBox>
             </Grid>
         </Border>
-        <!-- Row 4:Current Level,Total -->
-        <Border BorderBrush="White" BorderThickness="1" Grid.Column="3" Grid.Row="4" Background="DarkGreen">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Column="0" Grid.Row="0" Text="Level" Foreground="White" Margin="1"/>
-                <ComboBox x:Name="levelComboBox" Grid.Column="1" Grid.Row="0" Margin="1" Width="75" SelectedItem="{Binding CurrentLevel}" ItemsSource="{Binding CurrentLevels}"/>
-                <TextBlock Grid.Column="0" Grid.Row="2" Text="Cumulative" Foreground="White" Margin="1"/>
-                <TextBox Grid.Column="1" Grid.Row="2" Margin="1" Width="75" Text="{Binding TotalLevel}" KeyDown="TextBox_KeyDown"/>
-            </Grid>
-        </Border>
         <!-- Row 6:Damage,Magic Attack,etc. -->
-        <Border BorderBrush="White" BorderThickness="1" Grid.Column="3" Grid.Row="6" Grid.RowSpan="3" Background="DarkGreen">
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="3" Grid.Row="6" Grid.RowSpan="3" Background="DarkGreen" DataContext="{Binding OffensiveStats}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>

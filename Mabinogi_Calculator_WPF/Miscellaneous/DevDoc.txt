@@ -36,3 +36,11 @@ June 14, 2024
 - Began work on implementing skills starting with layout
 - Repositioned UI elements towards center of the window
 *Thinking about adding a TabControl for displaying different items e.g. Damage Tab, Weapons Tab, Stats and Skills Tab*
+
+July 24, 2024
+- Provided a ViewModelBase for future inheritance
+- Remade sub-ViewModels with interconnectivity between one another through MainViewModel
+- Rebound sub-ViewModels to respective sections
+- Removed TextBoxes and TextBlocks regarding character and cumulative levels as they were not necessary
+*ViewModel for Skills will be added later*
+
