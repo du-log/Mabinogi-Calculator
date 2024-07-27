@@ -44,3 +44,6 @@ July 24, 2024
 - Removed TextBoxes and TextBlocks regarding character and cumulative levels as they were not necessary
 *ViewModel for Skills will be added later*
 
+July 25, 2024
+- Modified MainGrid, added TabControl that includes Character Info, will include Skill Damage, maybe more tabs
+*Still thinking about how to implement an equipment window*

@@ -10,30 +10,77 @@
         ResizeMode="NoResize"
         MouseDown="Window_MouseDown">
     <Window.Resources>
-        <Style TargetType="{x:Type TabItem}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabItem}">
-                        <Border Padding="2,4,2,0">
-                            <Grid>
-                                <Grid>
-                                    <Border x:Name="Border" BorderBrush="White" BorderThickness="1" CornerRadius="3,3,0,0" Background="Transparent"/>
-                                </Grid>
-                                <ContentPresenter x:Name="Header" ContentSource="Header" TextElement.Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Header" Property="TextElement.Foreground" Value="MediumPurple"/>
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="DarkGreen"/>
-                                <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+        <Style x:Key="NotHumanDisable1" TargetType="ComboBox">
+            <Setter Property="Foreground" Value="DarkGray"/>
+            <Setter Property="IsEnabled" Value="False"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CharacterInfo.SelectedRace}" Value="Human">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="IsEnabled" Value="True"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="NotHumanDisable2" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="DarkGray"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CharacterInfo.SelectedRace}" Value="Human">
+                    <Setter Property="Foreground" Value="White"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="NotGiantDisable1" TargetType="{x:Type ComboBox}">
+            <Setter Property="Foreground" Value="DarkGray"/>
+            <Setter Property="IsEnabled" Value="False"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CharacterInfo.SelectedRace}" Value="Giant">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="IsEnabled" Value="True"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="NotGiantDisable2" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="DarkGray"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CharacterInfo.SelectedRace}" Value="Giant">
+                    <Setter Property="Foreground" Value="White"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="NotElfDisable1" TargetType="{x:Type ComboBox}">
+            <Setter Property="Foreground" Value="DarkGray"/>
+            <Setter Property="IsEnabled" Value="False"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CharacterInfo.SelectedRace}" Value="Elf">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="IsEnabled" Value="True"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="NotElfDisable2" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="DarkGray"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CharacterInfo.SelectedRace}" Value="Elf">
+                    <Setter Property="Foreground" Value="White"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="HumanGiant1" TargetType="{x:Type ComboBox}">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="IsEnabled" Value="True"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CharacterInfo.SelectedRace}" Value="Elf">
+                    <Setter Property="Foreground" Value="DarkGray"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="HumanGiant2" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CharacterInfo.SelectedRace}" Value="Elf">
+                    <Setter Property="Foreground" Value="DarkGray"/>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
     <Window.Background>
@@ -51,223 +98,265 @@
             <ColumnDefinition Name="Column1" Width="auto"/>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Name="Column3" Width="auto"/>
-            <ColumnDefinition Width="10"/>
-            <ColumnDefinition Name="Column5" Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition x:Name="Row2" Height="auto"/>
-            <RowDefinition Height="10"/>
-            <RowDefinition x:Name="Row4" Height="auto"/>
-            <RowDefinition Height="10"/>
-            <RowDefinition x:Name="Row6" Height="auto"/>
-            <RowDefinition Height="10"/>
-            <RowDefinition x:Name="Row8" Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <!-- Column 1 -->
-        <!-- Row 2:Name,Current Age,Race -->
-        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="2" Background="DarkGreen" DataContext="{Binding CharacterInfo}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <!-- Name -->
-                <TextBlock Grid.Column="0" Grid.Row="0" Text="Name" Foreground="White" Margin="3"/>
-                <TextBox Grid.Column="1" Grid.Row="0" Width="100" Text="{Binding CharacterName}" Margin="3"/>
-                <!-- Race -->
-                <TextBlock Grid.Column="0" Grid.Row="2" Text="Race" Foreground="White" Margin="3"/>
-                <ComboBox x:Name="raceComboBox" Grid.Column="1" Grid.Row="1" Width="auto" Margin="3" SelectedItem="{Binding SelectedRace}" ItemsSource="{Binding Race}"/>
-            </Grid>
-        </Border>
-        <!-- Row 4:HP,MP,Stam -->
-        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="4" Background="DarkGreen" DataContext="{Binding PrimaryStats}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Column="0" Grid.Row="0" Text="HP" Margin="2" Foreground="White"/>
-                <TextBox x:Name="baseHpText" Grid.Column="1" Grid.Row="0" Text="{Binding HPStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="40"/>
-                <TextBlock Grid.Column="0" Grid.Row="1" Text="MP" Margin="2" Foreground="White"/>
-                <TextBox x:Name="baseMpText" Grid.Column="1" Grid.Row="1" Text="{Binding MPStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="40"/>
-                <TextBlock Grid.Column="0" Grid.Row="2" Text="Stamina" Margin="2" Foreground="White"/>
-                <TextBox x:Name="baseStamText" Grid.Column="1" Grid.Row="2" Text="{Binding StamStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="40"/>
-            </Grid>
-        </Border>
-        <!-- Row 6:STR,INT,DEX,Will,Luck -->
-        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="6" Background="DarkGreen" DataContext="{Binding PrimaryStats}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <!-- Str -->
-                <TextBlock Grid.Column="0" Grid.Row="0" Text="STR" Margin="2" Foreground="White"/>
-                <TextBox x:Name="totalStrText" Grid.Column="1" Grid.Row="0" Text="{Binding StrStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="30"/>
-                <!-- Int -->
-                <TextBlock Grid.Column="0" Grid.Row="1" Text="INT" Margin="2" Foreground="White"/>
-                <TextBox x:Name="totalIntText" Grid.Column="1" Grid.Row="1" Text="{Binding IntStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="30"/>
-                <!-- Dex -->
-                <TextBlock Grid.Column="0" Grid.Row="2" Text="DEX" Margin="2" Foreground="White"/>
-                <TextBox x:Name="totalDexText" Grid.Column="1" Grid.Row="2" Text="{Binding DexStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="30"/>
-                <!-- Will -->
-                <TextBlock Grid.Column="0" Grid.Row="3" Text="Will" Margin="2" Foreground="White"/>
-                <TextBox x:Name="totalWillText" Grid.Column="1" Grid.Row="3" Text="{Binding WillStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="30"/>
-                <!-- Luck -->
-                <TextBlock Grid.Column="0" Grid.Row="4" Text="Luck" Margin="2" Foreground="White"/>
-                <TextBox x:Name="totalLuckText" Grid.Column="1" Grid.Row="4" Text="{Binding LuckStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="30"/>
-            </Grid>
-        </Border>
-        <!-- Row 8:Def,MDef,Prot,MProt -->
-        <Border BorderBrush="White" BorderThickness="1" Grid.Column="1" Grid.Row="8" Background="DarkGreen" DataContext="{Binding DefensiveStats}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Column="0" Grid.Row="0" Text="Defense" Margin="2" Foreground="White"/>
-                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding ModDefense, Mode=TwoWay}" Margin="2" Foreground="Yellow"/>
-                <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding BaseDefense, Mode=TwoWay, StringFormat={}({0})}" FontSize="10" Foreground="White"/>
-                <TextBlock Grid.Column="0" Grid.Row="1" Text="Protection" Margin="2" Foreground="White"/>
-                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding ModProtection, Mode=TwoWay}" Margin="2" Foreground="Yellow"/>
-                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding BaseProtection, Mode=TwoWay, StringFormat={}({0})}" FontSize="10" Foreground="White"/>
-                <TextBlock Grid.Column="0" Grid.Row="2" Text="Magic Def." Margin="2" Foreground="White"/>
-                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding ModMagicDefense, Mode=TwoWay}" Margin="2" Foreground="Yellow"/>
-                <TextBlock Grid.Column="2" Grid.Row="2" Text="{Binding BaseMagicDefense, Mode=TwoWay, StringFormat={}({0})}" FontSize="10" Foreground="White"/>
-                <TextBlock Grid.Column="0" Grid.Row="3" Text="Magic Prot." Margin="2" Foreground="White"/>
-                <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding ModMagicProtection, Mode=TwoWay}" Margin="2" Foreground="Yellow"/>
-                <TextBlock Grid.Column="2" Grid.Row="3" Text="{Binding BaseMagicProtection, Mode=TwoWay, StringFormat={}({0})}" FontSize="10" Foreground="White"/>
-            </Grid>
-        </Border>
-        <!-- Column 4 -->
-        <!-- Row 2:Title,Rebirth Age,Talent -->
-        <Border BorderBrush="White" BorderThickness="1" Grid.Column="3" Grid.Row="2" Background="DarkGreen">
-            <Grid Grid.Column="4" Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <!-- Title -->
-                <TextBlock Grid.Column="0" Grid.Row="0" Text="Title" Foreground="White" Margin="3"/>
-                <ComboBox x:Name="titleComboBox" Grid.Column="1" Grid.Row="0" Width="auto" Margin="3">
+        <Border BorderBrush="White" BorderThickness="1" Grid.Row="1" Grid.Column="1" Height="400" Width="485" CornerRadius="5">
+            <TabControl TabStripPlacement="Left" BorderThickness="0" Background="Green">
+                <TabControl.Resources>
+                    <Style TargetType="TabItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="TabItem">
+                                    <Border Padding="0,1,0,1">
+                                        <Grid>
+                                            <Grid>
+                                                <Border x:Name="Border" BorderBrush="White" BorderThickness="1" CornerRadius="3,0,0,3" Background="Green"/>
+                                            </Grid>
+                                            <ContentPresenter x:Name="Header" ContentSource="Header" TextElement.FontSize="20" TextElement.Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
+                                        </Grid>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Header" Property="TextElement.Foreground" Value="MediumPurple"/>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Header" Property="TextElement.Foreground" Value="Yellow"/>
+                                            <Setter TargetName="Border" Property="BorderThickness" Value="0"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabControl.Resources>
+                <TabItem Header="Character Info">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
 
-                </ComboBox>
-                <!-- 2nd Title -->
-                <TextBlock Grid.Column="0" Grid.Row="1" Text="2nd Title" Foreground="White" Margin="3"/>
-                <ComboBox x:Name="secondTitleComboBox" Grid.Column="1" Grid.Row="1" Width="auto" Margin="3">
-
-                </ComboBox>
-                <!-- Talent -->
-                <TextBlock Grid.Column="0" Grid.Row="3" Text="Active Talent" Foreground="White" Margin="3"/>
-                <ComboBox x:Name="talentComboBox" Grid.Column="1" Grid.Row="2" Width="auto" Margin="3">
-
-                </ComboBox>
-            </Grid>
+                        <Border BorderBrush="White" BorderThickness="1" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0" Background="DarkGreen" DataContext="{Binding CharacterInfo}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <!-- Name -->
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Name" Foreground="White" Margin="3"/>
+                                <TextBox Grid.Column="1" Grid.Row="0" Width="100" Text="{Binding CharacterName}" Margin="3"/>
+                                <!-- Race -->
+                                <TextBlock Grid.Column="0" Grid.Row="2" Text="Race" Foreground="White" Margin="3"/>
+                                <ComboBox x:Name="raceComboBox" Grid.Column="1" Grid.Row="1" Width="auto" Margin="3" SelectedItem="{Binding SelectedRace}" ItemsSource="{Binding Race}"/>
+                            </Grid>
+                        </Border>
+                        <Border BorderBrush="White" BorderThickness="1" Grid.Column="0" Grid.Row="2" Background="DarkGreen" DataContext="{Binding Primary}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="HP" Margin="2" Foreground="White"/>
+                                <TextBox x:Name="baseHpText" Grid.Column="1" Grid.Row="0" Text="{Binding HPStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="40"/>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="MP" Margin="2" Foreground="White"/>
+                                <TextBox x:Name="baseMpText" Grid.Column="1" Grid.Row="1" Text="{Binding MPStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="40"/>
+                                <TextBlock Grid.Column="0" Grid.Row="2" Text="Stamina" Margin="2" Foreground="White"/>
+                                <TextBox x:Name="baseStamText" Grid.Column="1" Grid.Row="2" Text="{Binding StamStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="40"/>
+                            </Grid>
+                        </Border>
+                        <Border BorderBrush="White" BorderThickness="1" Grid.Column="0" Grid.Row="4" Background="DarkGreen" DataContext="{Binding Primary}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <!-- Str -->
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="STR" Margin="2" Foreground="White"/>
+                                <TextBox x:Name="totalStrText" Grid.Column="1" Grid.Row="0" Text="{Binding StrStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="30"/>
+                                <!-- Int -->
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="INT" Margin="2" Foreground="White"/>
+                                <TextBox x:Name="totalIntText" Grid.Column="1" Grid.Row="1" Text="{Binding IntStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="30"/>
+                                <!-- Dex -->
+                                <TextBlock Grid.Column="0" Grid.Row="2" Text="DEX" Margin="2" Foreground="White"/>
+                                <TextBox x:Name="totalDexText" Grid.Column="1" Grid.Row="2" Text="{Binding DexStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="30"/>
+                                <!-- Will -->
+                                <TextBlock Grid.Column="0" Grid.Row="3" Text="Will" Margin="2" Foreground="White"/>
+                                <TextBox x:Name="totalWillText" Grid.Column="1" Grid.Row="3" Text="{Binding WillStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="30"/>
+                                <!-- Luck -->
+                                <TextBlock Grid.Column="0" Grid.Row="4" Text="Luck" Margin="2" Foreground="White"/>
+                                <TextBox x:Name="totalLuckText" Grid.Column="1" Grid.Row="4" Text="{Binding LuckStat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="30"/>
+                            </Grid>
+                        </Border>
+                        <Border BorderBrush="White" BorderThickness="1" Grid.Column="0" Grid.Row="6" Background="DarkGreen" DataContext="{Binding Defensive}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Defense" Margin="2" Foreground="White"/>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding ModDefense, Mode=TwoWay}" Margin="2" Foreground="Yellow"/>
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding BaseDefense, Mode=TwoWay, StringFormat={}({0})}" FontSize="10" Foreground="White"/>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Protection" Margin="2" Foreground="White"/>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding ModProtection, Mode=TwoWay}" Margin="2" Foreground="Yellow"/>
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding BaseProtection, Mode=TwoWay, StringFormat={}({0})}" FontSize="10" Foreground="White"/>
+                                <TextBlock Grid.Column="0" Grid.Row="2" Text="Magic Def." Margin="2" Foreground="White"/>
+                                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding ModMagicDefense, Mode=TwoWay}" Margin="2" Foreground="Yellow"/>
+                                <TextBlock Grid.Column="2" Grid.Row="2" Text="{Binding BaseMagicDefense, Mode=TwoWay, StringFormat={}({0})}" FontSize="10" Foreground="White"/>
+                                <TextBlock Grid.Column="0" Grid.Row="3" Text="Magic Prot." Margin="2" Foreground="White"/>
+                                <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding ModMagicProtection, Mode=TwoWay}" Margin="2" Foreground="Yellow"/>
+                                <TextBlock Grid.Column="2" Grid.Row="3" Text="{Binding BaseMagicProtection, Mode=TwoWay, StringFormat={}({0})}" FontSize="10" Foreground="White"/>
+                            </Grid>
+                        </Border>
+                        <Border BorderBrush="White" BorderThickness="1" Grid.Column="2" Grid.Row="4" Grid.RowSpan="3" Background="DarkGreen" DataContext="{Binding Offensive}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <!-- Damage -->
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Damage" Margin="2" Foreground="White"/>
+                                <TextBlock x:Name="damageText" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" Text="{Binding Damage}" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
+                                <!-- Magic Attack -->
+                                <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="Magic Attack" Margin="2" Foreground="White"/>
+                                <TextBlock x:Name="modMatkText" Grid.Column="2" Grid.Row="1" Text="{Binding ModMagicAttack, Mode=TwoWay}" Margin="2" Foreground="Yellow"/>
+                                <TextBlock x:Name="baseMatkText" Grid.Column="3" Grid.Row="1" Text="{Binding BaseMagicAttack, Mode=TwoWay, StringFormat={}({0})}" FontSize="10" Foreground="White"/>
+                                <!-- Alchemic Damage -->
+                                <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Text="Alchemic Damage" Margin="2" Foreground="White"/>
+                                <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <!-- Fire -->
+                                    <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Fire" Margin="25,2" Foreground="White"/>
+                                    <TextBlock x:Name="fireNum" Grid.Column="1" Grid.Row="0" Text="0" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
+                                    <!-- Water -->
+                                    <TextBlock Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" Text="Water" Margin="25,2" Foreground="White"/>
+                                    <TextBlock x:Name="waterNum" Grid.Column="3" Grid.Row="0" Text="0" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
+                                    <!-- Wind -->
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="Wind" Margin="25,2" Foreground="White"/>
+                                    <TextBlock x:Name="windNum" Grid.Column="1" Grid.Row="1" Text="0" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
+                                    <!-- Earth -->
+                                    <TextBlock Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Text="Earth" Margin="25,2" Foreground="White"/>
+                                    <TextBlock x:Name="earthNum" Grid.Column="3" Grid.Row="1" Text="0" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
+                                </Grid>
+                                <!-- Injury Rate -->
+                                <TextBlock Grid.Column="0" Grid.Row="4" Text="Injury Rate" Margin="2" Foreground="White"/>
+                                <TextBlock x:Name="injuryText" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" Text="{Binding Injury}" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
+                                <!-- Critical -->
+                                <TextBlock Grid.Column="0" Grid.Row="5" Text="Critical" Margin="2" Foreground="White"/>
+                                <TextBlock x:Name="criticalText" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3" Text="{Binding CriticalRate, StringFormat={}{0:N1}%}" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
+                                <!-- Balance -->
+                                <TextBlock Grid.Column="0" Grid.Row="6" Text="Balance" Margin="2" Foreground="White"/>
+                                <TextBlock x:Name="balanceText" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="0%" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
+                                <!-- Armor Pierce -->
+                                <TextBlock Grid.Column="0" Grid.Row="7" Text="Armor Pierce" Margin="2" Foreground="White"/>
+                                <TextBlock x:Name="pierceText" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Text="{Binding ArmorPierce}" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Skill Damage">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                </TabItem>
+            </TabControl>
         </Border>
-        <!-- Row 6:Damage,Magic Attack,etc. -->
-        <Border BorderBrush="White" BorderThickness="1" Grid.Column="3" Grid.Row="6" Grid.RowSpan="3" Background="DarkGreen" DataContext="{Binding OffensiveStats}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <!-- Damage -->
-                <TextBlock Grid.Column="0" Grid.Row="0" Text="Damage" Margin="2" Foreground="White"/>
-                <TextBlock x:Name="damageText" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" Text="{Binding Damage}" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
-                <!-- Magic Attack -->
-                <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="Magic Attack" Margin="2" Foreground="White"/>
-                <TextBlock x:Name="modMatkText" Grid.Column="2" Grid.Row="1" Text="{Binding ModMagicAttack, Mode=TwoWay}" Margin="2" Foreground="Yellow"/>
-                <TextBlock x:Name="baseMatkText" Grid.Column="3" Grid.Row="1" Text="{Binding BaseMagicAttack, Mode=TwoWay, StringFormat={}({0})}" FontSize="10" Foreground="White"/>
-                <!-- Alchemic Damage -->
-                <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Text="Alchemic Damage" Margin="2" Foreground="White"/>
-                <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-                    <!-- Fire -->
-                    <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Fire" Margin="25,2" Foreground="White"/>
-                    <TextBlock x:Name="fireNum" Grid.Column="1" Grid.Row="0" Text="0" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
-                    <!-- Water -->
-                    <TextBlock Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" Text="Water" Margin="25,2" Foreground="White"/>
-                    <TextBlock x:Name="waterNum" Grid.Column="3" Grid.Row="0" Text="0" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
-                    <!-- Wind -->
-                    <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="Wind" Margin="25,2" Foreground="White"/>
-                    <TextBlock x:Name="windNum" Grid.Column="1" Grid.Row="1" Text="0" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
-                    <!-- Earth -->
-                    <TextBlock Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Text="Earth" Margin="25,2" Foreground="White"/>
-                    <TextBlock x:Name="earthNum" Grid.Column="3" Grid.Row="1" Text="0" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
-                </Grid>
-                <!-- Injury Rate -->
-                <TextBlock Grid.Column="0" Grid.Row="4" Text="Injury Rate" Margin="2" Foreground="White"/>
-                <TextBlock x:Name="injuryText" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" Text="{Binding Injury}" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
-                <!-- Critical -->
-                <TextBlock Grid.Column="0" Grid.Row="5" Text="Critical" Margin="2" Foreground="White"/>
-                <TextBlock x:Name="criticalText" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3" Text="{Binding CriticalRate, StringFormat={}{0:N1}%}" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
-                <!-- Balance -->
-                <TextBlock Grid.Column="0" Grid.Row="6" Text="Balance" Margin="2" Foreground="White"/>
-                <TextBlock x:Name="balanceText" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="0%" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
-                <!-- Armor Pierce -->
-                <TextBlock Grid.Column="0" Grid.Row="7" Text="Armor Pierce" Margin="2" Foreground="White"/>
-                <TextBlock x:Name="pierceText" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Text="{Binding ArmorPierce}" Margin="2" HorizontalAlignment="Right" Foreground="White"/>
-            </Grid>
-        </Border>
-        <!-- Column 5 -->
+
         <!-- Skill Tabs -->
-        <Border BorderBrush="White" BorderThickness="1" Grid.Column="5" Grid.Row="2" Grid.RowSpan="7" Background="Green">
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="3" Grid.Row="1" Background="Green" CornerRadius="5">
             <TabControl BorderThickness="0" Width="400" Background="DarkGreen">
+                <TabControl.Resources>
+                    <Style TargetType="TabItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="TabItem">
+                                    <Border Padding="2,4,2,0">
+                                        <Grid>
+                                            <Grid>
+                                                <Border x:Name="Border" BorderBrush="White" BorderThickness="1" CornerRadius="3,3,0,0" Background="Transparent"/>
+                                            </Grid>
+                                            <ContentPresenter x:Name="Header" ContentSource="Header" TextElement.Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Header" Property="TextElement.Foreground" Value="MediumPurple"/>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Border" Property="Background" Value="DarkGreen"/>
+                                            <Setter TargetName="Header" Property="TextElement.Foreground" Value="Yellow"/>
+                                            <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabControl.Resources>
                 <TabItem Header="Combat">
                     <ScrollViewer MaxHeight="350" VerticalScrollBarVisibility="auto">
                         <Grid>
@@ -300,7 +389,7 @@
                                 <TextBlock Text="Smash" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="0" Margin="1">
-                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Universal" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <ComboBox Name="SmashRank" Grid.Column="3" Grid.Row="0" SelectedItem="{Binding SmashRank}" ItemsSource="{Binding DanSkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
                             <!-- Charge -->
@@ -309,7 +398,7 @@
                                 <TextBlock Text="Charge" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="1" Margin="1">
-                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Universal" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <ComboBox Name="ChargeRank" Grid.Column="3" Grid.Row="1" SelectedItem="{Binding ChargeRank}" ItemsSource="{Binding DanSkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
                             <!-- Assault Slash -->
@@ -318,7 +407,7 @@
                                 <TextBlock Text="Assault Slash" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="2" Margin="1">
-                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Universal" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <ComboBox Name="AssaultSlashRank" Grid.Column="3" Grid.Row="2" SelectedItem="{Binding AssaultSlashRank}" ItemsSource="{Binding DanSkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
                             <!-- Bash -->
@@ -327,7 +416,7 @@
                                 <TextBlock Text="Bash" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="3" Margin="1">
-                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Universal" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <ComboBox Name="BashRank" Grid.Column="3" Grid.Row="3" SelectedItem="{Binding BashRank}" ItemsSource="{Binding SkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
                             <!-- Windmill -->
@@ -336,7 +425,7 @@
                                 <TextBlock Text="Windmill" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="4" Margin="1">
-                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Universal" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <ComboBox Name="WindmillRank" Grid.Column="3" Grid.Row="4" SelectedItem="{Binding WindmillRank}" ItemsSource="{Binding DanSkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
                             <!-- Throwing Attack -->
@@ -345,52 +434,52 @@
                                 <TextBlock Text="Throwing Attack" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="5" Margin="1">
-                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Giant" Style="{StaticResource NotGiantDisable2}" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
-                            <ComboBox Name="ThrowingAttackRank" Grid.Column="3" Grid.Row="5" SelectedItem="{Binding ThrowingAttackRank}" ItemsSource="{Binding SkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <ComboBox Name="ThrowingAttackRank" Grid.Column="3" Grid.Row="5" SelectedItem="{Binding ThrowingAttackRank}" ItemsSource="{Binding SkillRankBox}" Style="{StaticResource NotGiantDisable1}" VerticalContentAlignment="Center" Margin="4"/>
                             <!-- Stampede -->
                             <Image x:Name="StampedeImg" Grid.Column="0" Grid.Row="6" Source="\Images\Skill_Icons\Stampede.png" Margin="1"/>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="6" Margin="1">
                                 <TextBlock Text="Stampede" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="6" Margin="1">
-                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Giant" Style="{StaticResource NotGiantDisable2}" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
-                            <ComboBox Name="StampedeRank" Grid.Column="3" Grid.Row="6" SelectedItem="{Binding StampedeRank}" ItemsSource="{Binding SkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <ComboBox Name="StampedeRank" Grid.Column="3" Grid.Row="6" SelectedItem="{Binding StampedeRank}" ItemsSource="{Binding SkillRankBox}" Style="{StaticResource NotGiantDisable1}" VerticalContentAlignment="Center" Margin="4"/>
                             <!-- Final Hit -->
                             <Image x:Name="FinalHitImg" Grid.Column="0" Grid.Row="7" Source="\Images\Skill_Icons\Final_Hit.png" Margin="1"/>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="7" Margin="1">
                                 <TextBlock Text="Final Hit" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="7" Margin="1">
-                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Human" Style="{StaticResource NotHumanDisable2}" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
-                            <ComboBox Name="FinalHitRank" Grid.Column="3" Grid.Row="7" SelectedItem="{Binding FinalHitRank}" ItemsSource="{Binding SkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <ComboBox Name="FinalHitRank" Grid.Column="3" Grid.Row="7" SelectedItem="{Binding FinalHitRank}" ItemsSource="{Binding SkillRankBox}" Style="{StaticResource NotHumanDisable1}" VerticalContentAlignment="Center" Margin="4"/>
                             <!-- Final Strike -->
                             <Image x:Name="FinalStrikeImg" Grid.Column="0" Grid.Row="8" Source="\Images\Skill_Icons\Final_Strike.png" Margin="1"/>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="8" Margin="1">
                                 <TextBlock Text="Final Strike" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="8" Margin="1">
-                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Giant" Style="{StaticResource NotGiantDisable2}" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
-                            <ComboBox Name="FinalStrikeRank" Grid.Column="3" Grid.Row="8" SelectedItem="{Binding FinalStrikeRank}" ItemsSource="{Binding SkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <ComboBox Name="FinalStrikeRank" Grid.Column="3" Grid.Row="8" SelectedItem="{Binding FinalStrikeRank}" ItemsSource="{Binding SkillRankBox}" Style="{StaticResource NotGiantDisable1}"  VerticalContentAlignment="Center" Margin="4"/>
                             <!-- Final Shot -->
                             <Image x:Name="FinalShotImg" Grid.Column="0" Grid.Row="9" Source="\Images\Skill_Icons\Final_Shot.png" Margin="1"/>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="9" Margin="1">
                                 <TextBlock Text="Final Shot" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="9" Margin="1">
-                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Elf" Style="{StaticResource NotElfDisable2}" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
-                            <ComboBox Name="FinalShotRank" Grid.Column="3" Grid.Row="9" SelectedItem="{Binding FinalShotRank}" ItemsSource="{Binding SkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <ComboBox Name="FinalShotRank" Grid.Column="3" Grid.Row="9" SelectedItem="{Binding FinalShotRank}" ItemsSource="{Binding SkillRankBox}" Style="{StaticResource NotElfDisable1}" VerticalContentAlignment="Center" Margin="4"/>
                             <!-- Rage Impact -->
                             <Image x:Name="RageImpactImg" Grid.Column="0" Grid.Row="10" Source="\Images\Skill_Icons\Rage_Impact.png" Margin="1"/>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="10" Margin="1">
                                 <TextBlock Text="Rage Impact" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="10" Margin="1">
-                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Universal" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <ComboBox Name="RageImpactRank" Grid.Column="3" Grid.Row="10" SelectedItem="{Binding RageImpactRank}" ItemsSource="{Binding SkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
                             <!-- Lance Charge -->
@@ -399,27 +488,27 @@
                                 <TextBlock Text="Lance Charge" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="11" Margin="1">
-                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Human/Giant" Style="{StaticResource HumanGiant2}" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
-                            <ComboBox Name="LanceChargeRank" Grid.Column="3" Grid.Row="11" SelectedItem="{Binding LanceChargeRank}" ItemsSource="{Binding DanSkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <ComboBox Name="LanceChargeRank" Grid.Column="3" Grid.Row="11" SelectedItem="{Binding LanceChargeRank}" ItemsSource="{Binding DanSkillRankBox}" Style="{StaticResource HumanGiant1}" VerticalContentAlignment="Center" Margin="4"/>
                             <!-- Lance Impact -->
                             <Image x:Name="LanceImpactImg" Grid.Column="0" Grid.Row="12" Source="\Images\Skill_Icons\Rage_Impact.png" Margin="1"/>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="12" Margin="1">
                                 <TextBlock Text="Lance Impact" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="12" Margin="1">
-                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Human/Giant" Style="{StaticResource HumanGiant2}" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
-                            <ComboBox Name="LanceImpactRank" Grid.Column="3" Grid.Row="12" SelectedItem="{Binding LanceImpactRank}" ItemsSource="{Binding SkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <ComboBox Name="LanceImpactRank" Grid.Column="3" Grid.Row="12" SelectedItem="{Binding LanceImpactRank}" ItemsSource="{Binding SkillRankBox}" Style="{StaticResource HumanGiant1}" VerticalContentAlignment="Center" Margin="4"/>
                             <!-- Stomp -->
                             <Image x:Name="StompImg" Grid.Column="0" Grid.Row="13" Source="\Images\Skill_Icons\Stomp.png" Margin="1"/>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="1" Grid.Row="13" Margin="1">
                                 <TextBlock Text="Stomp" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Column="2" Grid.Row="13" Margin="1">
-                                <TextBlock Text="Active" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Giant" Style="{StaticResource NotGiantDisable2}" TextAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
-                            <ComboBox Name="StompRank" Grid.Column="3" Grid.Row="13" SelectedItem="{Binding StompRank}" ItemsSource="{Binding SkillRankBox}" VerticalContentAlignment="Center" Margin="4"/>
+                            <ComboBox Name="StompRank" Grid.Column="3" Grid.Row="13" SelectedItem="{Binding StompRank}" ItemsSource="{Binding SkillRankBox}" Style="{StaticResource NotGiantDisable1}" VerticalContentAlignment="Center" Margin="4"/>
                         </Grid>
                     </ScrollViewer>
                 </TabItem>
