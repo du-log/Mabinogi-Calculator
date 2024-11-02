@@ -1,9 +1,9 @@
 ﻿Update Log
 March 29, 2024
-- Change Parenthesized Stat TextBlocks to TextBoxes
+- Changed Parenthesized Stat TextBlocks to TextBoxes
 - Removed Yellow TextBlocks for Primary Stat Modifiers
 - Removed Age TextBoxes and TextBlocks
-- Add Focusable to Main Grid for TextBox unfocusing
+- Added Focusable to Main Grid for TextBox unfocusing
 
 April 4, 2024
 - Renamed CharacterVM in CompositeVM : CVM -> CharacterVM
@@ -11,7 +11,7 @@ April 4, 2024
 - Created ViewModels for Stats: Primary, Defensive, Offensive
 - Renamed CompositeVM -> MainViewModel
 - Moved all currently existing fields, getters-setters, etc. to MainViewModel
-- Scrapping other view models due to complexity with linking StatVM and DefensiveVM
+- Scrapped other view models due to complexity with linking StatVM and DefensiveVM
 *Keeping the classes for future use, likely renaming if I need more view models when I implement skills, weapons, etc.*
 - Connected Calculations.cs model to MainViewModel
 *Thinking of using multiple models for different calculations*
@@ -47,3 +47,14 @@ July 24, 2024
 July 25, 2024
 - Modified MainGrid, added TabControl that includes Character Info, will include Skill Damage, maybe more tabs
 *Still thinking about how to implement an equipment window*
+
+November 2, 2024
+- Skill.cs now modified to a state which may allow a skill to be implemented
+- Added SkillBuilder.cs to hold the functions for creating new skills as well as a function that will return a list containing said skills
+*Decided on using a dictionary for storing skill multipliers, may need to modify Skill.cs at a later time when implementing magic skills*
+- Removed Balance fields from MainWindow as there was no use for calculating and implementing Balance when attaining skill damage values
+- Implemented Smash skill minimum damage calculation for all races as testing
+*Other skills will be implemented later on*
+- Added PropertyChanged for CharacterInfo to MainViewModel primarily for when SelectedRace is changed to reflect skill damage
+- Skill damage calculation functions in Calculations.cs will have a try-catch for when the application is initialized as values such as SkillRank and SelectedRace are null until made otherwise
+*Honestly, currently existing non-nullable fields could likely be declared nullable to prevent using a try-catch, but that would add significantly more lines to SkillsVM than I would like*

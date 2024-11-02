@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,28 +7,19 @@ using System.Threading.Tasks;
 
 namespace Mabinogi_Calculator_WPF.MVVM.Model
 {
-    class Skill
+    public class Skill
     {
         private string _skillName;
-        private string _skillType;
-        private List<double> _mainSkillDamage;
-        private List<double> _raceSkillDamage;
+        private string _skillRace;
+        private Dictionary<string, double> _skillRankDamage;
 
         public Skill() { }
 
-        public Skill(string skillName, string skillType, List<double> skillDamage)
+        public Skill(string skillName, string skillRace, Dictionary<string, double> RankDamage)
         {
             SkillName = skillName;
-            SkillType = skillType;
-            MainSkillDamage = skillDamage;
-        }
-
-        public Skill(string skillName, string skillType, List<double> mainSkillDamage, List<double> raceSkillDamage)
-        {
-            SkillName = skillName;
-            SkillType = skillType;
-            MainSkillDamage = mainSkillDamage;
-            RaceSkillDamage = raceSkillDamage;
+            SkillRace = skillRace;
+            SkillRankDamage = RankDamage;
         }
 
         public string SkillName 
@@ -35,20 +27,14 @@ namespace Mabinogi_Calculator_WPF.MVVM.Model
             get { return this._skillName; } 
             set { this._skillName = value; } 
         }
-        public string SkillType 
-        { 
-            get { return this._skillType; }
-            set { this._skillType = value; }
-        }
-        public List<double> MainSkillDamage 
+        public string SkillRace
         {
-            get { return this._mainSkillDamage; }
-            set { this._mainSkillDamage = value; }
+            get { return this._skillRace; }
+            set { this._skillRace = value; }
         }
-        public List<double> RaceSkillDamage
-        {
-            get { return this._raceSkillDamage; }
-            set { this._raceSkillDamage = value; }
+        public Dictionary<string, double> SkillRankDamage
+        {   get { return this._skillRankDamage; } 
+            set { this._skillRankDamage = value; }
         }
     }
 }

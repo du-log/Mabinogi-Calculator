@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,7 @@ namespace Mabinogi_Calculator_WPF.MVVM.Model
             return ((baseStat - 10) / divisor);
         }
 
+        //Stat Calculations
         public int CalcBaseDefense(int strength)
         {
             //Calculates base defense from total strength stat (base + modifiers, yellow value in-game), first 10 strength are non-existent.
@@ -40,7 +42,6 @@ namespace Mabinogi_Calculator_WPF.MVVM.Model
             //Calculate minimum damage from total strength stat
             return (int)CalculateStat(strength, 3);
         }
-        //public int CalcMinimumDamage(int strength, string weapon){} Placeholder for when weapons implemented
         public int CalcMaximumDamage(int strength)
         {
             //Calculate maximum damage from total strength stat
@@ -64,6 +65,39 @@ namespace Mabinogi_Calculator_WPF.MVVM.Model
         public int CalcArmorPierce(int dex)
         {
             return (int)CalculateStat(dex, 15);
+        }
+
+        //Skill Calculations
+        public int CalcSmashMinDamage(string SelectedRace, string SkillRank, int MinimumDamage, List<Skill> SkillList)
+        {
+            const string Name = "Smash";
+            string Race = "";
+            double SkillMultiplier = 0;
+            switch(SelectedRace)
+            {
+                case "Human":
+                case "Elf":
+                    Race = "HE";
+                    break;
+                case "Giant":
+                    Race = "G";
+                    break;
+            }
+            try
+            {
+                foreach (Skill skill in SkillList)
+                {
+                    if (skill.SkillName.Equals(Name) && (skill.SkillRace.Equals(Race)))
+                    {
+                        if (skill.SkillRankDamage.TryGetValue(SkillRank, out SkillMultiplier)) { break; }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString()+"\nDisregard if application was just initialized.");
+            }
+            return (int)(MinimumDamage * SkillMultiplier);
         }
     }
 }
